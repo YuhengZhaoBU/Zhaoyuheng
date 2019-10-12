@@ -1,5 +1,4 @@
-*** generate a figure parallel to Figure 4 in Marie paper
-*** 1005 begin
+
 
 clear
 use "../input/GA_cleaned_Ganong"
@@ -11,13 +10,25 @@ keep if validDates==1
 keep if servdaysprsnjail>=90 & servdaysprsnjail<=10*365
 
 *** replication of figure 2
-*** 1008
 
 *** take the mean of every 3 month
 gen servmonthsprsnjail = servdaysprsnjail/365.25*12
 
+***
+dis td(1apr1990)
 
 gen period = .
+gen month = mofd(ratedate)
+sum month if ratedate >= td(1apr1990) & ratedate < td(30apr1990)
+sum month if ratedate >= td(1apr1996) & ratedate < td(30apr1996)
+
+forvalues counter = 363/435    { 
+	replace period = int((`counter'-363)/3)+1 if month==`counter'
+	}
+	
+***
+/*
+*gen period = .
 replace period = 1  if ratedate >= td(1apr1990) & ratedate < td(1jul1990)
 replace period = 2  if ratedate >= td(1jul1990) & ratedate < td(1oct1990)
 replace period = 3  if ratedate >= td(1oct1990) & ratedate < td(1jan1991)
@@ -42,6 +53,7 @@ replace period = 21 if ratedate >= td(1apr1995) & ratedate < td(1jul1995)
 replace period = 22 if ratedate >= td(1jul1995) & ratedate < td(1oct1995)
 replace period = 23 if ratedate >= td(1oct1995) & ratedate < td(1jan1996)
 replace period = 24 if ratedate >= td(1jan1996) & ratedate < td(1apr1996)
+*/
 
 collapse  (mean) adjguidemos servmonthsprsnjail rtp3, by(period)
 
@@ -56,7 +68,7 @@ scatter adjguidemos period if period <13, c(1) xlabel(1(1)24) ylabel(20(5)35, la
 			 xtitle("Period",  size(small)) ///
 			 ytitle("Guidelines",  size(small)) ///
 			 scheme(s1mono)
-graph export "../output/Figure2_1.png", replace		 
+graph export "../output/Figure2_1.eps", replace		 
 
 
 
@@ -73,7 +85,7 @@ yaxis(1) ///
 			 ytitle("Return-to-prison rate",  size(small)) ///			 
 			 ytitle("Months served", axis(2)  size(small)) ///
 			 scheme(s1mono)
-graph export "../output/Figure2_2.png", replace				 
+graph export "../output/Figure2_2.eps", replace				 
 			 
 			 			 
 

@@ -2,8 +2,7 @@
 *** 1005 begin
 
 clear
-cd "../input"
-use "GA_cleaned_Ganong"
+use "../input/GA_cleaned_Ganong"
 
 keep if ratedate<td(27jun2007) // after this date, sucscore also takes values in 20-97 range
 keep if ratedate>td(1jan1982) & ratedate<td(27jun2003)
@@ -57,6 +56,8 @@ scatter adjguidemos period if period <13, c(1) xlabel(1(1)24) ylabel(20(5)35, la
 			 xtitle("Period",  size(small)) ///
 			 ytitle("Guidelines",  size(small)) ///
 			 scheme(s1mono)
+graph export "../output/Figure2_1.png", replace		 
+
 
 
 *** figure2_2 
@@ -72,7 +73,7 @@ yaxis(1) ///
 			 ytitle("Return-to-prison rate",  size(small)) ///			 
 			 ytitle("Months served", axis(2)  size(small)) ///
 			 scheme(s1mono)
-			 
+graph export "../output/Figure2_2.png", replace				 
 			 
 			 			 
 

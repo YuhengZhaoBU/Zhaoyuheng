@@ -21,11 +21,11 @@ twoway lpolyci reconv3 ratedate, tline(1Apr1993) ///
  xlabel(`=td(1may1983)'(`=2*365.25')`=td(27jun2003)', format(%tdMon-YY) labsize(small)) //
 graph export "../output/scatter_reconv.eps", replace
 
-binscatter rtp3 ratedate, n(24) savedata(binned) replace line(none)
+binscatter rtp3 ratedate, n(100) savedata(binned) replace line(none)
 clear
 qui do binned
 save "../input/binned",replace
-erase "../code/binned.csv"
+*erase "../code/binned.csv"
 
 clear
 use "../input/GA_crime11"
@@ -47,11 +47,11 @@ graph export "../output/bin_fix_rtp.eps", replace
 clear
 use "../input/GA_crime11"
 
-binscatter reconv3 ratedate, n(24) savedata(binned2) replace line(none)
+binscatter reconv3 ratedate, n(100) savedata(binned2) replace line(none)
 clear
 qui do binned2
 save "../input/binned2",replace
-erase "../code/binned2.csv"
+*erase "../code/binned2.csv"
 
 clear
 use "../input/GA_crime11"
@@ -69,6 +69,59 @@ twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_recov.eps", replace
 
+** MSE-optimal bandwidth 52.405 (6 month)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(52.405) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) , bw(52.405) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2 == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1may1983)'(`=2*365.25')`=td(27jun2003)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_bw52.eps", replace
+
+
+** MSE-optimal bandwidth 97.783 (1 year)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(97.783) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) , bw(97.783) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2 == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1may1983)'(`=2*365.25')`=td(27jun2003)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_bw97.eps", replace
+
+** MSE-optimal bandwidth 125.188 (2 years)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(125.188) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) , bw(125.188) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2 == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1may1983)'(`=2*365.25')`=td(27jun2003)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_bw125.eps", replace
+
+
+** MSE-optimal bandwidth 393.859 (5 years)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(393.859) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) , bw(393.859) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2 == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1may1983)'(`=2*365.25')`=td(27jun2003)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_bw393.eps", replace
 
 ************************ RD with different time range (10/14) ******************
 ********RD with 6 months

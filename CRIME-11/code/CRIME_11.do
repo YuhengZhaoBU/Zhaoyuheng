@@ -31,30 +31,30 @@ save "../input/binned",replace
 
 clear
 use "../input/GA_crime11"
-binscatter rtp3 ratedate if ratedate>=td(6feb1993) & ratedate<td(23may1993), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter rtp3 ratedate if ratedate>=td(6feb1993) & ratedate<td(23may1993), tline(12144) n(40) savedata(binned_53) replace line(none)
 clear
-qui do binned
+qui do binned_53
 save "../input/binned_53",replace
 
 clear
 use "../input/GA_crime11"
-binscatter rtp3 ratedate if ratedate>=td(20dec1992) & ratedate<td(8jul1993), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter rtp3 ratedate if ratedate>=td(20dec1992) & ratedate<td(8jul1993), tline(12144) n(40) savedata(binned_97) replace line(none)
 clear
-qui do binned
+qui do binned_97
 save "../input/binned_97",replace
 
 clear
 use "../input/GA_crime11"
-binscatter rtp3 ratedate if ratedate>=td(25nov1992) & ratedate<td(6aug1993), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter rtp3 ratedate if ratedate>=td(25nov1992) & ratedate<td(6aug1993), tline(12144) n(40) savedata(binned_125) replace line(none)
 clear
-qui do binned
+qui do binned_125
 save "../input/binned_125",replace
 
 clear
 use "../input/GA_crime11"
-binscatter rtp3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1jun1994), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter rtp3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1jun1994), tline(12144) n(40) savedata(binned_393) replace line(none)
 clear
-qui do binned
+qui do binned_393
 save "../input/binned_393",replace
 
 clear
@@ -91,23 +91,23 @@ save "../input/binned2_53",replace
 
 clear
 use "../input/GA_crime11"
-binscatter reconv3 ratedate if ratedate>=td(20dec1992) & ratedate<td(8jul1993), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter reconv3 ratedate if ratedate>=td(20dec1992) & ratedate<td(8jul1993), tline(12144) n(40) savedata(binned2_97) replace line(none)
 clear
-qui do binned
+qui do binned2_97
 save "../input/binned2_97",replace
 
 clear
 use "../input/GA_crime11"
-binscatter reconv3 ratedate if ratedate>=td(25nov1992) & ratedate<td(6aug1993), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter reconv3 ratedate if ratedate>=td(25nov1992) & ratedate<td(6aug1993), tline(12144) n(40) savedata(binned2_125) replace line(none)
 clear
-qui do binned
+qui do binned2_125
 save "../input/binned2_125",replace
 
 clear
 use "../input/GA_crime11"
-binscatter reconv3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1jun1994), tline(12144) n(40) savedata(binned) replace line(none)
+binscatter reconv3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1jun1994), tline(12144) n(40) savedata(binned2_393) replace line(none)
 clear
-qui do binned
+qui do binned2_393
 save "../input/binned2_393",replace
 
 clear
@@ -181,6 +181,78 @@ twoway lpolyci reconv3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1Apr1993
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_recov_bw393.eps", replace
+
+
+******** 3 graphs: fitted lines from the data range that each optimal bandwidth 
+******** got computed from (6m, 1y, 2y) + binscatter cover the same data range. (11/03/2019)
+
+clear
+use "../input/GA_crime11"
+binscatter reconv3 ratedate if ratedate>=td(1oct1992) & ratedate<td(1oct1993), tline(12144) n(40) savedata(binned2_6m) replace line(none)
+clear
+qui do binned2_6m
+save "../input/binned2_6m",replace
+
+clear
+use "../input/GA_crime11"
+binscatter reconv3 ratedate if ratedate>=td(1apr1992) & ratedate<td(1apr1994), tline(12144) n(40) savedata(binned2_1y) replace line(none)
+clear
+qui do binned2_1y
+save "../input/binned2_1y",replace
+
+clear
+use "../input/GA_crime11"
+binscatter reconv3 ratedate if ratedate>=td(1apr1991) & ratedate<td(1apr1995), tline(12144) n(40) savedata(binned2_2y) replace line(none)
+clear
+qui do binned2_2y
+save "../input/binned2_2y",replace
+
+
+clear
+use "../input/GA_crime11"
+** MSE-optimal bandwidth 52.405 (6 month)
+append using "../input/binned2_6m", gen(binned2_6m)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1oct1992) & ratedate<td(1Apr1993) , bw(52.405) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1oct1993), bw(52.405) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2_6m == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1oct1992)'(`=365.25/12')`=td(1oct1993)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_6m.eps", replace
+
+** MSE-optimal bandwidth 97.783 (1 year)
+append using "../input/binned2_1y", gen(binned2_1y)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1apr1992) & ratedate<td(1Apr1993) , bw(97.783) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1apr1994) , bw(97.783) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2_1y == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1apr1992)'(`=365.25/6')`=td(1apr1994)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_1y.eps", replace
+
+** MSE-optimal bandwidth 125.188 (2 years)
+append using "../input/binned2_2y", gen(binned2_2y)
+twoway lpolyci reconv3 ratedate if ratedate>=td(1apr1991) & ratedate<td(1Apr1993) , bw(125.188) clcolor(black) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1apr1995) , bw(125.188) clcolor(black) || ///
+	   scatter reconv3 ratedate if binned2_2y == 1 , mc(blue) ||, ///
+			 tline(1Apr1993) ///
+			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Reconviction rate"  ,  size(small)) ///
+			 xlabel(`=td(1apr1991)'(`=365.25/3')`=td(1apr1995)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_recov_2y.eps", replace
+
+
 
 
 

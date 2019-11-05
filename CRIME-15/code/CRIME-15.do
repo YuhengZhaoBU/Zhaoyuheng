@@ -45,14 +45,14 @@ save "../input/binned_6m",replace
 
 clear
 use "../input/GA_crime15"
-binscatter rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), tline(13880) n(40) savedata(binned_1y) replace line(none)
+binscatter rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), tline(13880) n(60) savedata(binned_1y) replace line(none)
 clear
 qui do binned_1y
 save "../input/binned_1y",replace
 
 clear
 use "../input/GA_crime15"
-binscatter rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), tline(13880) n(40) savedata(binned_2y) replace line(none)
+binscatter rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), tline(13880) n(100) savedata(binned_2y) replace line(none)
 clear
 qui do binned_2y
 save "../input/binned_2y",replace
@@ -62,8 +62,8 @@ clear
 use "../input/GA_crime15"
 ** MSE-optimal bandwidth 60.308 (6 month)
 append using "../input/binned_6m", gen(binned_6m)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jan1998) , bw(60.308) clcolor(black) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jul1998), bw(60.308) clcolor(black) || ///
+twoway lpolyci rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jan1998) , bw(60.308) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jul1998), bw(60.308) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter rtp3 ratedate if binned_6m == 1 , mc(blue) ||, ///
 			 tline(1jan1998) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -72,12 +72,12 @@ twoway lpolyci rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jan1998) ,
 			 xlabel(`=td(1jul1997)'(`=365.25/12')`=td(1jul1998)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
-graph export "../output/bin_fix_recov_6m.eps", replace
+graph export "../output/bin_fix_rtp_6m.eps", replace
 
 ** MSE-optimal bandwidth 102.364 (1 year)
 append using "../input/binned_1y", gen(binned_1y)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1998) , bw(102.364) clcolor(black) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan1999) , bw(102.364) clcolor(black) || ///
+twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1998) , bw(102.364) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan1999) , bw(102.364) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter rtp3 ratedate if binned_1y == 1 , mc(blue) ||, ///
 			 tline(1jan1998) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -86,12 +86,12 @@ twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1998) ,
 			 xlabel(`=td(1jan1997)'(`=365.25/6')`=td(1jan1999)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
-graph export "../output/bin_fix_recov_1y.eps", replace
+graph export "../output/bin_fix_rtp_1y.eps", replace
 
 ** MSE-optimal bandwidth 140.682 (2 years)
 append using "../input/binned_2y", gen(binned_2y)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan1998) , bw(140.682) clcolor(black) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan2000) , bw(140.682) clcolor(black) || ///
+twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan1998) , bw(140.682) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan2000) , bw(140.682) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter rtp3 ratedate if binned_2y == 1 , mc(blue) ||, ///
 			 tline(1jan1998) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -100,9 +100,116 @@ twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan1998) ,
 			 xlabel(`=td(1jan1996)'(`=365.25/3')`=td(1jan2000)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
-graph export "../output/bin_fix_recov_2y.eps", replace
+graph export "../output/bin_fix_rtp_2y.eps", replace
+
+
+******** PART2 18mar1981 treatment
+sort ratedate
+order ratedate
+dis td(18mar1981)
+
+******** RD with 6 months
+rdbwselect rtp3 ratedate if ratedate>=td(18sep1980) & ratedate<td(18sep1981), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 16.761
+rdrobust rtp3 ratedate if ratedate>=td(18sep1980) & ratedate<td(18sep1981), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
+
+
+******** RD with 1 year
+rdbwselect rtp3 ratedate if ratedate>=td(18mar1980) & ratedate<td(18mar1982), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 37.733
+rdrobust rtp3 ratedate if ratedate>=td(18mar1980) & ratedate<td(18mar1982), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
+
+
+******** RD with 2 years
+rdbwselect rtp3 ratedate if ratedate>=td(18mar1979) & ratedate<td(18mar1983), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 62.193
+rdrobust rtp3 ratedate if ratedate>=td(18mar1979) & ratedate<td(18mar1983), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
+
+
+clear
+use "../input/GA_crime15"
+binscatter rtp3 ratedate if ratedate>=td(18sep1980) & ratedate<td(18sep1981), tline(7747) n(40) savedata(binned81_6m) replace line(none)
+clear
+qui do binned81_6m
+save "../input/binned81_6m",replace
+
+clear
+use "../input/GA_crime15"
+binscatter rtp3 ratedate if ratedate>=td(18mar1980) & ratedate<td(18mar1982), tline(7747) n(60) savedata(binned81_1y) replace line(none)
+clear
+qui do binned81_1y
+save "../input/binned81_1y",replace
+
+clear
+use "../input/GA_crime15"
+binscatter rtp3 ratedate if ratedate>=td(18mar1979) & ratedate<td(18mar1983), tline(7747) n(100) savedata(binned81_2y) replace line(none)
+clear
+qui do binned81_2y
+save "../input/binned81_2y",replace
 
 
 
+clear
+use "../input/GA_crime15"
+** MSE-optimal bandwidth 16.761 (6 month)
+append using "../input/binned81_6m", gen(binned81_6m)
+twoway lpolyci rtp3 ratedate if ratedate>=td(18sep1980) & ratedate<td(18mar1981), bw(16.761) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(18mar1981) & ratedate<td(18sep1981), bw(16.761) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned81_6m == 1 , mc(blue) ||, ///
+			 tline(18mar1981) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(18sep1980)'(`=365.25/12')`=td(18sep1981)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%" .45 "45%" .5 "50%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp81_6m.eps", replace
 
 
+clear
+use "../input/GA_crime15"
+** MSE-optimal bandwidth 16.761 (6 month), restricted time on the early period 
+append using "../input/binned81_6m", gen(binned81_6m)
+twoway lpolyci rtp3 ratedate if ratedate>=td(1feb1981) & ratedate<td(18mar1981), bw(16.761) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(18mar1981) & ratedate<td(18sep1981), bw(16.761) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned81_6m == 1 , mc(blue) ||, ///
+			 tline(18mar1981) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(1feb1981)'(`=365.25/12')`=td(18sep1981)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%" .45 "45%" .5 "50%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp81_6m2.eps", replace
+
+
+** MSE-optimal bandwidth 37.733 (1 year), restricted time on the early period
+append using "../input/binned81_1y", gen(binned81_1y)
+twoway lpolyci rtp3 ratedate if ratedate>=td(1feb1981) & ratedate<td(18mar1981) , bw(37.733) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(18mar1981) & ratedate<td(18mar1982) , bw(37.733) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned81_1y == 1 , mc(blue) ||, ///
+			 tline(18mar1981) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(1feb1981)'(`=365.25/6')`=td(18mar1982)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp81_1y2.eps", replace
+
+** MSE-optimal bandwidth 62.193 (2 years), restricted time on the early period
+append using "../input/binned81_2y", gen(binned81_2y)
+twoway lpolyci rtp3 ratedate if ratedate>=td(1feb1981) & ratedate<td(18mar1981) , bw(62.193) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(18mar1981) & ratedate<td(18mar1983) , bw(62.193) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned81_2y == 1 , mc(blue) ||, ///
+			 tline(18mar1981) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(1feb1981)'(`=365.25/3')`=td(18mar1983)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp81_2y2.eps", replace

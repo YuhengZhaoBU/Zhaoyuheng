@@ -61,8 +61,8 @@ clear
 use "../input/GA_crime11"
 
 append using "../input/binned", gen(binned)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(100) clcolor(black) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1Apr1993) , bw(100) clcolor(black) || ///
+twoway lpolyci rtp3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(100) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1Apr1993) , bw(100) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter rtp3 ratedate if binned == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Return-to-prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -114,8 +114,8 @@ clear
 use "../input/GA_crime11"
 
 append using "../input/binned2", gen(binned2)
-twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(100) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) , bw(100) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(1may1983) & ratedate<td(1Apr1993) , bw(100) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) , bw(100) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2 == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -128,8 +128,8 @@ graph export "../output/bin_fix_recov.eps", replace
 
 ** MSE-optimal bandwidth 52.405 (6 month)
 append using "../input/binned2_53", gen(binned2_53)
-twoway lpolyci reconv3 ratedate if ratedate>=td(6feb1993) & ratedate<td(1Apr1993) , bw(52.405) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(23may1993), bw(52.405) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(6feb1993) & ratedate<td(1Apr1993) , bw(52.405) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(23may1993), bw(52.405) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_53 == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -142,8 +142,8 @@ graph export "../output/bin_fix_recov_bw52.eps", replace
 
 ** MSE-optimal bandwidth 97.783 (1 year)
 append using "../input/binned2_97", gen(binned2_97)
-twoway lpolyci reconv3 ratedate if ratedate>=td(20dec1992) & ratedate<td(1Apr1993) , bw(97.783) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(8jul1993) , bw(97.783) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(20dec1992) & ratedate<td(1Apr1993), bw(97.783) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(8jul1993) , bw(97.783) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_97 == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -156,8 +156,8 @@ graph export "../output/bin_fix_recov_bw97.eps", replace
 
 ** MSE-optimal bandwidth 125.188 (2 years)
 append using "../input/binned2_125", gen(binned2_125)
-twoway lpolyci reconv3 ratedate if ratedate>=td(25nov1992) & ratedate<td(1Apr1993) , bw(125.188) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(6aug1993) , bw(125.188) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(25nov1992) & ratedate<td(1Apr1993) , bw(125.188) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(6aug1993) , bw(125.188) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_125 == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -170,8 +170,8 @@ graph export "../output/bin_fix_recov_bw125.eps", replace
 
 ** MSE-optimal bandwidth 393.859 (5 years)
 append using "../input/binned2_393", gen(binned2_393)
-twoway lpolyci reconv3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1Apr1993) , bw(393.859) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1jun1994) , bw(393.859) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(1feb1992) & ratedate<td(1Apr1993) , bw(393.859) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1jun1994) , bw(393.859) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_393 == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -212,8 +212,8 @@ clear
 use "../input/GA_crime11"
 ** MSE-optimal bandwidth 52.405 (6 month)
 append using "../input/binned2_6m", gen(binned2_6m)
-twoway lpolyci reconv3 ratedate if ratedate>=td(1oct1992) & ratedate<td(1Apr1993) , bw(52.405) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1oct1993), bw(52.405) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(1oct1992) & ratedate<td(1Apr1993), bw(52.405) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1oct1993), bw(52.405) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_6m == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -226,8 +226,8 @@ graph export "../output/bin_fix_recov_6m.eps", replace
 
 ** MSE-optimal bandwidth 97.783 (1 year)
 append using "../input/binned2_1y", gen(binned2_1y)
-twoway lpolyci reconv3 ratedate if ratedate>=td(1apr1992) & ratedate<td(1Apr1993) , bw(97.783) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1apr1994) , bw(97.783) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(1apr1992) & ratedate<td(1Apr1993) , bw(97.783) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1apr1994) , bw(97.783) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_1y == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
@@ -240,8 +240,8 @@ graph export "../output/bin_fix_recov_1y.eps", replace
 
 ** MSE-optimal bandwidth 125.188 (2 years)
 append using "../input/binned2_2y", gen(binned2_2y)
-twoway lpolyci reconv3 ratedate if ratedate>=td(1apr1991) & ratedate<td(1Apr1993) , bw(125.188) clcolor(black) || ///
-	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1apr1995) , bw(125.188) clcolor(black) || ///
+twoway lpolyci reconv3 ratedate if ratedate>=td(1apr1991) & ratedate<td(1Apr1993) , bw(125.188) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci reconv3 ratedate if ratedate>=td(1Apr1993) & ratedate<td(1apr1995) , bw(125.188) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter reconv3 ratedate if binned2_2y == 1 , mc(blue) ||, ///
 			 tline(1Apr1993) ///
 			 legend(order(1) label(1 "Reconviction rate, 95% CI") region(style(none)) margin(zero) size(small)) ///

@@ -2,4 +2,13 @@
 
 2. Jan 1998 treatment: In 1997, the GDC announced that all inmates convicted of certain offenses after December 31 must serve at least 90\% of their sentence. The parole board maintained the power to assign inmates convicted of a so-called 90\% crime to release dates between 90\% and 100\% of their original sentences and their original discretion over inmates convicted of other crimes. Although the specified offenses included such sensitive crimes as child molestation and incest, the majority of those affected by the policy were convicted of robbery and assault. In 2006, the reform was declared unconstitutional by a state court and discontinued.
 
+Findings in Kuziemko (2013):
+In general, exploiting quasi-experiments from the state of Georgia, Kuziemko shows that prison time reduces recidivism risk and that parole boards set prison time in an allocatively efficient manner. Prisoners respond to these incentives; after a reform that eliminated parole for certain offenders, they accumulated a greater number of disciplinary infractions, completed fewer prison rehabilitative programs, and recidivated at higher rates than inmates unaffected by the reform. Kuziemko estimates that eliminating parole for all prisoners would increase the prison population by 10% while also increasing the crime rate through deleterious effects on recidivism.
+
+To be more specific about the 2 experiments:
+For Mar 1981 treatment, the point estimates suggest that a one-month increase in the parole board’s recommendation is associated with a 3.6 percentage point increase in the three-year recidivism rate, whereas an extra month in prison reduces the three-year recidivism rate by roughly 3.3 percentage points. Thus, not only do the coefficients on actual and recommended time served have the predicted, opposite signs, they are of roughly equal magnitude.
+
+For Jan 1998 treatment, the coefficient on the interaction term 90% 􏰫 after 1997 (coef of interest) is positive and significant (0.0533) without basic covariates and grows in magnitude by about 20% when basic covariates are added (0.0650). Reduced incentive for good behavior in prison led to 6% points more recidivism.
+
+ 
 

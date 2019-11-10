@@ -11,6 +11,13 @@ dis td(1jan1998)  // 13880
 ******** PART1 1jan1998 treatment
 ******** rtp3
 
+** restricted sample to serve time between 4 and 5 years
+** because This condition means that inmates who begin their sentence in the final year of my sample period (2001) will be
+** released by 2006 and will thus have spent all or the large majority of their time in prison while the 90% policy was in effect.
+** also because this will form a better control group (not to light crime)
+
+keep if timeserv>4 & timeserv<5
+
 ******** RD with 6 months
 rdbwselect rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998), ///
 kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 60.308
@@ -101,6 +108,83 @@ twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan1998) ,
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_rtp_2y.eps", replace
+
+
+
+*** result restricting timeserv to 4-5 years (1998)
+
+clear
+use "../input/GA_crime15"
+keep if timeserv>4 & timeserv<5
+binscatter rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998), tline(13880) n(40) savedata(binned_6m_45) replace line(none)
+clear
+qui do binned_6m_45
+save "../input/binned_6m_45",replace
+
+clear
+use "../input/GA_crime15"
+keep if timeserv>4 & timeserv<5
+binscatter rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), tline(13880) n(60) savedata(binned_1y_45) replace line(none)
+clear
+qui do binned_1y_45
+save "../input/binned_1y_45",replace
+
+clear
+use "../input/GA_crime15"
+keep if timeserv>4 & timeserv<5
+binscatter rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), tline(13880) n(100) savedata(binned_2y_45) replace line(none)
+clear
+qui do binned_2y_45
+save "../input/binned_2y_45",replace
+
+
+clear
+use "../input/GA_crime15"
+keep if timeserv>4 & timeserv<5
+** MSE-optimal bandwidth 60.308 (6 month)
+append using "../input/binned_6m_45", gen(binned_6m_45)
+twoway lpolyci rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jan1998), bw(60.308) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jul1998), bw(60.308) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned_6m_45 == 1 , mc(blue) ||, ///
+			 tline(1jan1998) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(1jul1997)'(`=365.25/12')`=td(1jul1998)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp_6m_45.eps", replace
+
+** MSE-optimal bandwidth 102.364 (1 year)
+append using "../input/binned_1y_45", gen(binned_1y_45)
+twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1998), bw(102.364) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan1999), bw(102.364) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned_1y_45 == 1 , mc(blue) ||, ///
+			 tline(1jan1998) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(1jan1997)'(`=365.25/6')`=td(1jan1999)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp_1y_45.eps", replace
+
+** MSE-optimal bandwidth 140.682 (2 years)
+append using "../input/binned_2y_45", gen(binned_2y_45)
+twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan1998) , bw(140.682) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan2000) , bw(140.682) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 ratedate if binned_2y_45 == 1 , mc(blue) ||, ///
+			 tline(1jan1998) ///
+			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
+			 xtitle("Date of parole decision",  size(small)) ///
+			 ytitle("Return to prison rate"  ,  size(small)) ///
+			 xlabel(`=td(1jan1996)'(`=365.25/3')`=td(1jan2000)', format(%tdMon-YY) labsize(small)) ///
+			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
+			 scheme(s1color) name(rtp, replace)
+graph export "../output/bin_fix_rtp_2y_45.eps", replace
+
+
+
 
 
 ******** PART2 18mar1981 treatment

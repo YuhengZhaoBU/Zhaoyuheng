@@ -95,11 +95,50 @@ bysort womres: sum gtubb gmetbr gssk gshalb
 
 bysort womres: sum predu prlit mars nboy ngirl hesit
 ** [T7][comments] TBC
+sum nboy ngirl
+gen nchi = nboy+ngirl
 
+sum hhtel hhelec hhtv hhcyc hhmcyc hhcar
+replace hhtel=0 if hhtel==2
+replace hhelec=0 if hhelec==2
+replace hhtv=0 if hhtv==2
+replace hhcyc=0 if hhcyc==2
+replace hhmcyc=0 if hhmcyc==2
+replace hhcar=0 if hhcar==2
+replace prlit=1 if predu>=5
+replace prlit=0 if prlit==2
+replace hhbpl=0 if hhbpl==2
+replace hesit=0 if hesit==2
+replace hesit=. if hesit==7
 
+gen hhasset = hhtel + hhelec + hhtv + hhcyc + hhmcyc + hhcar
 
+replace oldpr=0 if oldpr==2
+replace prexp=0 if prexp==2
 
+* population of Pradhan's own villages is given by India census
+* panel a
+bysort womres: sum prage predu prlit nchi hhbpl hhasset   hesit
 
+* panel b
+replace knfunc=0 if knfunc==2 | knfunc==3
+replace notrain=0 if notrain==2
+replace spelect=0 if spelect==2
+replace spelect=0 if spelect==2
+gen nofutrun=.
+replace nofutrun=1 if futrun==2
+replace nofutrun=0 if futrun!=2
+bysort womres: sum oldpr prexp knfunc notrain spelect sphelp nofutrun
+
+* panel c
+gen right = .
+replace right =0
+replace right =1 if praff==6 | praff==7   // see wikipedia https://en.wikipedia.org/wiki/All_India_Trinamool_Congress
+gen left =.
+replace left  =0 
+replace left  =1 if praff==1  // see wikipedia https://en.wikipedia.org/wiki/Left_Front_(West_Bengal)
+
+bysort womres: sum left right
 
 
 

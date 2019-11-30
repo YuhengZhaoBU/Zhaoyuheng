@@ -1,33 +1,51 @@
 ******** PART2 18mar1981 treatment
-clear
+clear all
 use "../input/GA_crime15"
 
-sort tentparoledate
-order tentparoledate
-dis td(18mar1981)
+** drop outliers in tentparoledate
+format tentparoledate %td
+drop if tentparoledate < admitdate & admitdate!=.
+save "../input/GA_crime15", replace
+
 
 ******** RD with 6 months
 * This doesn't work, Invertibility problem in the computation of preliminary bandwidth below the threshold...
-*rdbwselect rtp3 tentparoledate if tentparoledate>=td(18sep1980) & tentparoledate<td(18sep1981), ///
-*kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 16.761
-*rdrobust rtp3 tentparoledate if tentparoledate>=td(18sep1980) & tentparoledate<td(18sep1981), ///
-*kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
+clear all
+use "../input/GA_crime15"
+sort tentparoledate
+order tentparoledate
+dis td(18mar1981)
+cap rdbwselect rtp3 tentparoledate if tentparoledate>=td(18apr1980) & tentparoledate<td(18feb1982), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
+cap rdrobust rtp3 tentparoledate if tentparoledate>=td(18apr1980) & tentparoledate<td(18feb1981), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
 
 
 ******** RD with 1 year
-rdbwselect rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate<td(18mar1982), ///
-kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 107.200
-rdrobust rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate<td(18mar1982), ///
-kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
+clear all
+use "../input/GA_crime15"
+sort tentparoledate
+order tentparoledate
+dis td(18mar1981)
+cap rdbwselect rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate<td(18mar1982), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
+cap rdrobust rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate<td(18mar1982), ///
+kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
 
 
 ******** RD with 2 years
+clear all
+use "../input/GA_crime15"
+sort tentparoledate
+order tentparoledate
+dis td(18mar1981)
 rdbwselect rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparoledate<td(18mar1983), ///
-kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 248.694 
+kernel(triangular) p(1) bwselect(mserd) c(7747) // MSE-optimal bandwidth is 157.676 
 rdrobust rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparoledate<td(18mar1983), ///
 kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
 
 
+********
 clear
 use "../input/GA_crime15"
 binscatter rtp3 tentparoledate if tentparoledate>=td(18sep1980) & tentparoledate<td(18sep1981), tline(7747) n(40) savedata(binned81_6m) replace line(none)
@@ -45,7 +63,6 @@ qui do binned81_1y
 save "../temp/binned81_1y",replace
 erase "../input/binned81_1y.do"
 erase "../input/binned81_1y.csv"
-
 
 clear
 use "../input/GA_crime15"

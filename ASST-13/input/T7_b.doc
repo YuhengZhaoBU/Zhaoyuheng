@@ -1,0 +1,322 @@
+{\rtf1\ansi\deff0 {\fonttbl{\f0\fnil Garamond;}}
+{\info {\author .}{\company .}{\title .}}
+\deflang1033\plain\fs20
+{\footer\pard\qc\plain\f0\fs20\chpgn\par}
+{
+{\fs20\b\qc\line Summary statistics: N mean sd min max by(  womres) \line    0.1 Whether reserved for Woman Pradhan: . }{\par}
+{\trowd\trgaph108\trleft-108
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx1100
+\fs20\pard\intbl\qr { }\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx2350
+\fs20\pard\intbl\qr { N}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx3600
+\fs20\pard\intbl\qr { mean}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx4850
+\fs20\pard\intbl\qr { sd}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx6100
+\fs20\pard\intbl\qr { min}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx7350
+\fs20\pard\intbl\qr { max}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { oldpr}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { prexp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { knfunc}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { notrain}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { spelect}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { sphelp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\clbrdrb\brdrw15\brdrs\cellx1100
+\fs20\pard\intbl\ql { nofutrun}\cell
+\clbrdrb\brdrw15\brdrs\cellx2350
+\fs20\pard\intbl\qr {5}\cell
+\clbrdrb\brdrw15\brdrs\cellx3600
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx4850
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx7350
+\fs20\pard\intbl\qr {0}\cell
+\row}
+
+{\fs20\b\qc\line 0 }{\par}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { oldpr}\cell
+\cellx2350
+\fs20\pard\intbl\qr {95}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.021}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.144}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { prexp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {107}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.776}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.419}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { knfunc}\cell
+\cellx2350
+\fs20\pard\intbl\qr {107}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.346}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.478}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { notrain}\cell
+\cellx2350
+\fs20\pard\intbl\qr {46}\cell
+\cellx3600
+\fs20\pard\intbl\qr {0}\cell
+\cellx4850
+\fs20\pard\intbl\qr {0}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {0}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { spelect}\cell
+\cellx2350
+\fs20\pard\intbl\qr {10}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.2}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.422}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { sphelp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {26}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.538}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.508}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\clbrdrb\brdrw15\brdrs\cellx1100
+\fs20\pard\intbl\ql { nofutrun}\cell
+\clbrdrb\brdrw15\brdrs\cellx2350
+\fs20\pard\intbl\qr {107}\cell
+\clbrdrb\brdrw15\brdrs\cellx3600
+\fs20\pard\intbl\qr {.206}\cell
+\clbrdrb\brdrw15\brdrs\cellx4850
+\fs20\pard\intbl\qr {.406}\cell
+\clbrdrb\brdrw15\brdrs\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+
+{\fs20\b\qc\line 1 }{\par}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { oldpr}\cell
+\cellx2350
+\fs20\pard\intbl\qr {18}\cell
+\cellx3600
+\fs20\pard\intbl\qr {0}\cell
+\cellx4850
+\fs20\pard\intbl\qr {0}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {0}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { prexp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {54}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.278}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.452}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { knfunc}\cell
+\cellx2350
+\fs20\pard\intbl\qr {54}\cell
+\cellx3600
+\fs20\pard\intbl\qr {0}\cell
+\cellx4850
+\fs20\pard\intbl\qr {0}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {0}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { notrain}\cell
+\cellx2350
+\fs20\pard\intbl\qr {48}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.062}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.245}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { spelect}\cell
+\cellx2350
+\fs20\pard\intbl\qr {14}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.643}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.497}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { sphelp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {25}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.92}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.277}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\clbrdrb\brdrw15\brdrs\cellx1100
+\fs20\pard\intbl\ql { nofutrun}\cell
+\clbrdrb\brdrw15\brdrs\cellx2350
+\fs20\pard\intbl\qr {54}\cell
+\clbrdrb\brdrw15\brdrs\cellx3600
+\fs20\pard\intbl\qr {.333}\cell
+\clbrdrb\brdrw15\brdrs\cellx4850
+\fs20\pard\intbl\qr {.476}\cell
+\clbrdrb\brdrw15\brdrs\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+
+
+\writepositionforappend
+}}

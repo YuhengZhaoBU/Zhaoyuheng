@@ -18,6 +18,10 @@ replace prsex=0 if prsex==1
 replace prsex=1 if prsex==2
 
 tab womres prsex
+asdoc tab womres prsex, save(T1) replace  // 
+
+*tab2xl2 womres prsex using T1, row(2) col(2) replace
+*tab2xl womres prsex using T1, row(2) col(2) replace  // for stata 15 and above
 ** [T1][comments] a little bit different since the Proportion of Female Pradhans for Unreserved GP here is 7.5% rather than 6.5% in the paper.
 
 ** [T2][comments] village variables in T2 are collected by the 1991 census of India
@@ -25,29 +29,31 @@ tab womres prsex
 merge 1:1 gpnum using "womenpolicymakers_partb.dta", gen (_mb)
 merge 1:1 gpnum using "womenpolicymakers_resurveya", gen (_mra)
 merge 1:1 gpnum using "womenpolicymakers_resurveyd", gen (_mrd)
-
-replace gpwiss=0 if gpwiss==2
-replace rwomissue=0 if rwomissue==2
-replace rmissue=0 if rmissue==2
-replace gpgswp =. if gpgswp==99
-
-save "merged data_ECMA2004_GP.dta",replace
-
-bysort womres: sum gpgswp rwomissue rmissue  // gpwiss
-** [T3][comments] quite different from the paper.
-** Fraction of women among participant here is 7.58% and 6.01% for reserved and unreserved, but 9.80% and 6.88% in the paper
-** Fraction of Women Filed a Complaint to the GP is 61.11% and 74.19% for reserved and unreserved, but 20% anf 11% in the paper
-** Fraction of Women Filed a Complaint to the GP is 94.44% and 100% for reserved and unreserved, which is the same as in the paper.
-
-** [T4][comments] information on T4 (ISSUES RAISED BY WOMEN AND MEN IN THE LAST 6 MONTH) were not provided in the data
-
-************
-merge 1:m gpnum using "womenpolicymakers_partc.dta", gen (_mc) // different villnum within gpnum
-merge 1:1 gpnum villnum using "womenpolicymakers_partd.dta", gen (_md)
 save "merged data_ECMA2004.dta",replace
 
+merge 1:m gpnum using "womenpolicymakers_partc.dta", gen (_mc) // different villnum within gpnum
+merge 1:1 gpnum villnum using "womenpolicymakers_partd.dta", gen (_md)
+save "merged data_ECMA2004_GP.dta",replace
+********
+
 clear
-use "../input/merged data_ECMA2004.dta"
+use "../input/merged data_ECMA2004_GP.dta"
+
+
+replace gpwiss=0 if gpwiss==2
+replace vgswq=. if vgswq==9
+replace vgswq=0 if vgswq==2
+replace rwomissue=0 if rwomissue==2
+replace rmissue=0 if rmissue==2
+
+asdoc bysort  womres: sum vgswp rwomissue rmissue, save(T3) replace  // 
+** [T3][comments] part of T3 is close, but some are quite different from the paper.
+** Fraction of Men Filed a Complaint to the GP is exactly the same as in the paper.
+** Fraction of women among participant here is 10.38% and 6.87% for reserved and unreserved, but 9.80% and 6.88% in the paper
+** Fraction of Women Filed a Complaint to the GP is 61.11% and 74.19% for reserved and unreserved, but 20% anf 11% in the paper
+
+** [T4][comments] information on T4 (ISSUES RAISED BY WOMEN AND MEN IN THE LAST 6 MONTH) were not provided in the data
+** some information about detail issues in vwiss1-vwiss4, but the total number is about 91, far less from 500 in the paper
 
 gen roadcon = (vroad==1)
 gen numvssk = .
@@ -62,7 +68,8 @@ gen numirri =.
 replace numirri=0 if gminb==2 & gminr==2
 replace numirri=gminbn + gminrn if gminb==1 | gminr==1
 
-bysort womres: sum roadcon numvssk numirri
+asdoc bysort womres: sum roadcon numvssk numirri, save(T5_village) replace
+
 ** [T5][comments] 
 ** [T5 village level] different from the paper.
 ** Information on "Number of Drinking Water Facilities Newly Built or Repaired" were not provided in the data
@@ -73,7 +80,7 @@ bysort womres: sum roadcon numvssk numirri
 
 ************
 clear
-use "../input/merged data_ECMA2004_GP.dta"
+use "../input/merged data_ECMA2004.dta"
 
 replace gmetb=0 if gmetb==2
 replace gmetr=0 if gmetr==2
@@ -84,7 +91,8 @@ replace gshalb=0 if gshalb==2
 gen gmetbr = gmetb + gmetr
 replace gmetbr=1 if gmetbr==1 | gmetbr==2
 
-bysort womres: sum gtubb gmetbr gssk gshalb
+asdoc bysort womres: sum gtubb gmetbr gssk gshalb, save(T5_GP) replace
+
 ** [T5 GP level] almost the same from the paper.
 ** New Tubewell Was Built is 1 and 0.93 for reserved and unreserved, which is the same as in the paper
 ** Metal Road Was Built or Repaired is 0.67 and 0.48 for reserved and unreserved, which is the same as in the paper
@@ -110,6 +118,8 @@ replace prlit=0 if prlit==2
 replace hhbpl=0 if hhbpl==2
 replace hesit=0 if hesit==2
 replace hesit=. if hesit==7
+replace mars=. if mars==3
+replace mars=0 if mars==4
 
 gen hhasset = hhtel + hhelec + hhtv + hhcyc + hhmcyc + hhcar
 
@@ -118,8 +128,13 @@ replace prexp=0 if prexp==2
 
 * population of Pradhan's own villages is given by India census
 * panel a
-bysort womres: sum prage predu prlit nchi hhbpl hhasset   hesit
+asdoc bysort womres: sum prage predu prlit mars nchi hhbpl hhasset hesit, save(T7_a) replace
+** [T7_a][comments] age, number of children, below poverty line, number of hh assets, hessitates in answering is exactly the same as in the paper
+** for edu, it's 10.36 (womres==0) and 8.33 (womres==1), while it's 7.13 and 9.92 in the paper
+** for literacy, it's 0.99 (womres==0) and 0.87 (womres==1), while it's 0.98 and 0.80 in the paper
+** for marriage, it's 0.87 (womres==0) and 0.94 (womres==1), while it's 0.87 and 0.89 in the paper
 
+* information on Was Elected to the GP Council Before 1998 is not available
 * panel b
 replace knfunc=0 if knfunc==2 | knfunc==3
 replace notrain=0 if notrain==2
@@ -128,7 +143,12 @@ replace spelect=0 if spelect==2
 gen nofutrun=.
 replace nofutrun=1 if futrun==2
 replace nofutrun=0 if futrun!=2
-bysort womres: sum oldpr prexp knfunc notrain spelect sphelp nofutrun
+replace sphelp=0 if sphelp==2
+asdoc bysort womres: sum oldpr prexp knfunc notrain spelect sphelp nofutrun, save(T7_b) replace
+** [T7_b][comments] prexp, knfunc, notrain, nofutrun is exactly the same as in the paper
+** for Pradhan Before 1998 (oldpr), it's 0.02 (womres==0) and 0 (womres==1), while it's 0.12 and 0 in the paper
+** for Spouse ever Elected to the Panchayat (spelect), it's 0.2 (womres==0) and 0.64 (womres==1), while it's 0.02 and 0.17 in the paper (much fewer obs)
+** for Spouse Helps (sphelp), it's 0.54 (womres==0) and 0.92 (womres==1), while it's 0.13 and 0.43 in the paper  (much fewer obs)
 
 * panel c
 gen right = .
@@ -138,7 +158,9 @@ gen left =.
 replace left  =0 
 replace left  =1 if praff==1  // see wikipedia https://en.wikipedia.org/wiki/Left_Front_(West_Bengal)
 
-bysort womres: sum left right
+asdoc bysort womres: sum left right, save(T7_c) replace
+** [T7_c][comments] Right (Trinamul or BJP) is exactly the same as in the paper
+** for Left Front, it's 0.62 (womres==0) and 0.65 (womres==1), while it's 0.69 and 0.69 in the paper
 
 
 

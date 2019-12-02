@@ -74,25 +74,10 @@ erase "../input/binned81_2y.do"
 erase "../input/binned81_2y.csv"
 
 
-
-** MSE-optimal bandwidth 107.200 (1 year), restricted time on the early period
-append using "../temp/binned81_1y", gen(binned81_1y)
-twoway lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate<td(18mar1981) , bw(107.200) clcolor(black) degree (1) kernel(triangle) || ///
-	   lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1981) & tentparoledate<td(18mar1982) , bw(107.200) clcolor(black) degree (1) kernel(triangle) || ///
-	   scatter rtp3 tentparoledate if binned81_1y == 1 , mc(blue) ||, ///
-			 tline(18mar1981) ///
-			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
-			 xtitle("Date of parole decision",  size(small)) ///
-			 ytitle("Return to prison rate"  ,  size(small)) ///
-			 xlabel(`=td(1feb1981)'(`=365.25/6')`=td(18mar1982)', format(%tdMon-YY) labsize(small)) ///
-			 ylabel(.05 "5%" .1 "10%" .15 "15%" .2 "20%" .25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///	
-			 scheme(s1color) name(rtp, replace)
-graph export "../output/bin_fix_rtp81_1y2.eps", replace
-
-** MSE-optimal bandwidth 248.694 (2 years), restricted time on the early period
+** MSE-optimal bandwidth 157.676 (2 years), restricted time on the early period
 append using "../temp/binned81_2y", gen(binned81_2y)
-twoway lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparoledate<td(18mar1981) , bw(248.694) clcolor(black) degree (1) kernel(triangle) || ///
-	   lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1981) & tentparoledate<td(18mar1983) , bw(248.694) clcolor(black) degree (1) kernel(triangle) || ///
+twoway lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparoledate<td(18mar1981) , bw(157.676) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1981) & tentparoledate<td(18mar1983) , bw(157.676) clcolor(black) degree (1) kernel(triangle) || ///
 	   scatter rtp3 tentparoledate if binned81_2y == 1 , mc(blue) ||, ///
 			 tline(18mar1981) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///

@@ -1,0 +1,154 @@
+{\rtf1\ansi\deff0 {\fonttbl{\f0\fnil Garamond;}}
+{\info {\author .}{\company .}{\title .}}
+\deflang1033\plain\fs20
+{\footer\pard\qc\plain\f0\fs20\chpgn\par}
+{
+{\fs20\b\qc\line Summary statistics: N mean sd min max by(   womres) \line    0.1 Whether reserved for Woman Pradhan: . }{\par}
+{\trowd\trgaph108\trleft-108
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx1100
+\fs20\pard\intbl\qr { }\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx2350
+\fs20\pard\intbl\qr { N}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx3600
+\fs20\pard\intbl\qr { mean}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx4850
+\fs20\pard\intbl\qr { sd}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx6100
+\fs20\pard\intbl\qr { min}\cell
+\clbrdrt\brdrw10\brdrs \clbrdrb\brdrw25\brdrs  \cellx7350
+\fs20\pard\intbl\qr { max}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { vgswp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { rwomissue}\cell
+\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\clbrdrb\brdrw15\brdrs\cellx1100
+\fs20\pard\intbl\ql { rmissue}\cell
+\clbrdrb\brdrw15\brdrs\cellx2350
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx3600
+\fs20\pard\intbl\qr {.}\cell
+\clbrdrb\brdrw15\brdrs\cellx4850
+\fs20\pard\intbl\qr {.}\cell
+\clbrdrb\brdrw15\brdrs\cellx6100
+\fs20\pard\intbl\qr {.}\cell
+\clbrdrb\brdrw15\brdrs\cellx7350
+\fs20\pard\intbl\qr {.}\cell
+\row}
+
+{\fs20\b\qc\line 0 }{\par}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { vgswp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {304}\cell
+\cellx3600
+\fs20\pard\intbl\qr {6.865}\cell
+\cellx4850
+\fs20\pard\intbl\qr {10.72}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {85}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { rwomissue}\cell
+\cellx2350
+\fs20\pard\intbl\qr {93}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.742}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.44}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\clbrdrb\brdrw15\brdrs\cellx1100
+\fs20\pard\intbl\ql { rmissue}\cell
+\clbrdrb\brdrw15\brdrs\cellx2350
+\fs20\pard\intbl\qr {93}\cell
+\clbrdrb\brdrw15\brdrs\cellx3600
+\fs20\pard\intbl\qr {1}\cell
+\clbrdrb\brdrw15\brdrs\cellx4850
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx6100
+\fs20\pard\intbl\qr {1}\cell
+\clbrdrb\brdrw15\brdrs\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+
+{\fs20\b\qc\line 1 }{\par}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { vgswp}\cell
+\cellx2350
+\fs20\pard\intbl\qr {159}\cell
+\cellx3600
+\fs20\pard\intbl\qr {10.377}\cell
+\cellx4850
+\fs20\pard\intbl\qr {14.44}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {99}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\cellx1100
+\fs20\pard\intbl\ql { rwomissue}\cell
+\cellx2350
+\fs20\pard\intbl\qr {54}\cell
+\cellx3600
+\fs20\pard\intbl\qr {.611}\cell
+\cellx4850
+\fs20\pard\intbl\qr {.492}\cell
+\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+{\trowd\trgaph108\trleft-108
+\clbrdrb\brdrw15\brdrs\cellx1100
+\fs20\pard\intbl\ql { rmissue}\cell
+\clbrdrb\brdrw15\brdrs\cellx2350
+\fs20\pard\intbl\qr {54}\cell
+\clbrdrb\brdrw15\brdrs\cellx3600
+\fs20\pard\intbl\qr {.944}\cell
+\clbrdrb\brdrw15\brdrs\cellx4850
+\fs20\pard\intbl\qr {.231}\cell
+\clbrdrb\brdrw15\brdrs\cellx6100
+\fs20\pard\intbl\qr {0}\cell
+\clbrdrb\brdrw15\brdrs\cellx7350
+\fs20\pard\intbl\qr {1}\cell
+\row}
+
+
+\writepositionforappend
+}}

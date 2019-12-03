@@ -52,8 +52,8 @@ binscatter rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998), tlin
 clear
 qui do binned_6m
 save "../temp/binned_6m",replace
-erase "../input/binned_6m.do"
-erase "../input/binned_6m.csv"
+erase "../code/binned_6m.do"
+erase "../code/binned_6m.csv"
 
 clear
 use "../input/GA_crime15"
@@ -61,8 +61,8 @@ binscatter rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), tlin
 clear
 qui do binned_1y
 save "../temp/binned_1y",replace
-erase "../input/binned_1y.do"
-erase "../input/binned_1y.csv"
+erase "../code/binned_1y.do"
+erase "../code/binned_1y.csv"
 
 clear
 use "../input/GA_crime15"
@@ -70,8 +70,8 @@ binscatter rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), tlin
 clear
 qui do binned_2y
 save "../temp/binned_2y",replace
-erase "../input/binned_2y.do"
-erase "../input/binned_2y.csv"
+erase "../code/binned_2y.do"
+erase "../code/binned_2y.csv"
 
 clear
 use "../input/GA_crime15"

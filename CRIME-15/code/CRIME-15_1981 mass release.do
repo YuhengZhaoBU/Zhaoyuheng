@@ -52,8 +52,8 @@ binscatter rtp3 tentparoledate if tentparoledate>=td(18sep1980) & tentparoledate
 clear
 qui do binned81_6m
 save "../temp/binned81_6m",replace
-erase "../input/binned81_6m.do"
-erase "../input/binned81_6m.csv"
+erase "../code/binned81_6m.do"
+erase "../code/binned81_6m.csv"
 
 clear
 use "../input/GA_crime15"
@@ -61,8 +61,8 @@ binscatter rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate
 clear
 qui do binned81_1y
 save "../temp/binned81_1y",replace
-erase "../input/binned81_1y.do"
-erase "../input/binned81_1y.csv"
+erase "../code/binned81_1y.do"
+erase "../code/binned81_1y.csv"
 
 clear
 use "../input/GA_crime15"
@@ -70,8 +70,8 @@ binscatter rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparoledate
 clear
 qui do binned81_2y
 save "../temp/binned81_2y",replace
-erase "../input/binned81_2y.do"
-erase "../input/binned81_2y.csv"
+erase "../code/binned81_2y.do"
+erase "../code/binned81_2y.csv"
 
 
 ** MSE-optimal bandwidth 157.676 (2 years), restricted time on the early period

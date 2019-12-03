@@ -24,7 +24,7 @@ asdoc tab womres prsex, save(T1) replace  //
 *tab2xl womres prsex using T1, row(2) col(2) replace  // for stata 15 and above
 ** [T1][comments] a little bit different since the Proportion of Female Pradhans for Unreserved GP here is 7.5% rather than 6.5% in the paper.
 
-** [T2][comments] village variables in T2 are collected by the 1991 census of India
+** [T2][comments] village variables in T2 are collected by the 1991 census of India, not included here
 
 merge 1:1 gpnum using "womenpolicymakers_partb.dta", gen (_mb)
 merge 1:1 gpnum using "womenpolicymakers_resurveya", gen (_mra)
@@ -50,7 +50,7 @@ asdoc bysort  womres: sum vgswp rwomissue rmissue, save(T3) replace  //
 ** [T3][comments] part of T3 is close, but some are quite different from the paper.
 ** Fraction of Men Filed a Complaint to the GP is exactly the same as in the paper.
 ** Fraction of women among participant here is 10.38% and 6.87% for reserved and unreserved, but 9.80% and 6.88% in the paper
-** Fraction of Women Filed a Complaint to the GP is 61.11% and 74.19% for reserved and unreserved, but 20% anf 11% in the paper
+** Fraction of Women Filed a Complaint to the GP is 61.11% and 74.19% for reserved and unreserved, but 20% and 11% in the paper
 
 ** [T4][comments] information on T4 (ISSUES RAISED BY WOMEN AND MEN IN THE LAST 6 MONTH) were not provided in the data
 ** some information about detail issues in vwiss1-vwiss4, but the total number is about 91, far less from 500 in the paper
@@ -73,7 +73,7 @@ asdoc bysort womres: sum roadcon numvssk numirri, save(T5_village) replace
 ** [T5][comments] 
 ** [T5 village level] different from the paper.
 ** Information on "Number of Drinking Water Facilities Newly Built or Repaired" were not provided in the data
-** Condition of Roads (1 if in good condition) is 0.18 and 0.12 for reserved and unreserved, but 0.41 and 023 in the paper.
+** Condition of Roads (1 if in good condition) is 0.18 and 0.12 for reserved and unreserved, but 0.41 and 0.23 in the paper.
 ** Number of Panchayat Run Education Centers is 0.07 and 0.13 for reserved and unreserved, while it is 0.06 and 0.12 in the paper.
 ** Number of Irrigation Facilities Newly Built or Repaired is 1.04 and 0.65 for reserved and unreserved, but 3.01 and 3.39 in the paper.
 ** Information on community building is not provided.

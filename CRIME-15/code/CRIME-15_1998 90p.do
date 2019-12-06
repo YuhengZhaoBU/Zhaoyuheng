@@ -3,11 +3,11 @@
 clear
 use "../input/GA_crime15"
 
-*keep if ratedate!=.
-sort ratedate
+*keep if sentdate!=.
+sort sentdate
 dis td(1jan1998)  // 13880
 drop if tentparoledate < admitdate & admitdate!=.
-save "../input/GA_crime15", replace
+save "../temp/GA_crime15_clean", replace
 
 
 
@@ -22,23 +22,23 @@ save "../input/GA_crime15", replace
 ** also because this will form a better control group (not to light crime)
 
 ******** RD with 6 months
-rdbwselect rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998), ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 60
-rdrobust rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998), ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
+rdbwselect rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998), ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 50
+rdrobust rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998), ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // significant  -0.075
 
 
 ******** RD with 1 year
-rdbwselect rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 101
-rdrobust rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
+rdbwselect rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999), ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 62
+rdrobust rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999), ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // significant  -0.064
 
 
 ******** RD with 2 years
-rdbwselect rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 141
-rdrobust rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), ///
+rdbwselect rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000), ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 150
+rdrobust rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000), ///
 kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
 
 
@@ -47,8 +47,8 @@ kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
 ******** got computed from (6m, 1y, 2y) + binscatter cover the same data range. (11/04/2019)
 
 clear
-use "../input/GA_crime15"
-binscatter rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998), tline(13880) n(40) savedata(binned_6m) replace line(none)
+use "../temp/GA_crime15_clean"
+binscatter rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998), tline(13880) n(40) savedata(binned_6m) replace line(none)
 clear
 qui do binned_6m
 save "../temp/binned_6m",replace
@@ -56,8 +56,8 @@ erase "../code/binned_6m.do"
 erase "../code/binned_6m.csv"
 
 clear
-use "../input/GA_crime15"
-binscatter rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999), tline(13880) n(60) savedata(binned_1y) replace line(none)
+use "../temp/GA_crime15_clean"
+binscatter rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999), tline(13880) n(60) savedata(binned_1y) replace line(none)
 clear
 qui do binned_1y
 save "../temp/binned_1y",replace
@@ -65,8 +65,8 @@ erase "../code/binned_1y.do"
 erase "../code/binned_1y.csv"
 
 clear
-use "../input/GA_crime15"
-binscatter rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000), tline(13880) n(100) savedata(binned_2y) replace line(none)
+use "../temp/GA_crime15_clean"
+binscatter rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000), tline(13880) n(100) savedata(binned_2y) replace line(none)
 clear
 qui do binned_2y
 save "../temp/binned_2y",replace
@@ -74,43 +74,43 @@ erase "../code/binned_2y.do"
 erase "../code/binned_2y.csv"
 
 clear
-use "../input/GA_crime15"
-** MSE-optimal bandwidth 60 (6 month)
+use "../temp/GA_crime15_clean"
+** MSE-optimal bandwidth 50 (6 month)
 append using "../temp/binned_6m", gen(binned_6m)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jan1998) , bw(60) clcolor(black) degree (1) kernel(triangle) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jul1998), bw(60) clcolor(black) degree (1) kernel(triangle) || ///
-	   scatter rtp3 ratedate if binned_6m == 1 , mc(blue) ||, ///
+twoway lpolyci rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jan1998) , bw(50) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 sentdate if sentdate>=td(1jan1998) & sentdate<td(1jul1998), bw(50) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 sentdate if binned_6m == 1 , mc(blue) ||, ///
 			 tline(1jan1998) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
-			 xtitle("Date of parole decision",  size(small)) ///
+			 xtitle("Date of sentence",  size(small)) ///
 			 ytitle("Return to prison rate"  ,  size(small)) ///
 			 xlabel(`=td(1jul1997)'(`=365.25/12')`=td(1jul1998)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_rtp_6m.eps", replace
 
-** MSE-optimal bandwidth 101 (1 year)
+** MSE-optimal bandwidth 62 (1 year)
 append using "../temp/binned_1y", gen(binned_1y)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1998) , bw(101) clcolor(black) degree (1) kernel(triangle) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan1999) , bw(101) clcolor(black) degree (1) kernel(triangle) || ///
-	   scatter rtp3 ratedate if binned_1y == 1 , mc(blue) ||, ///
+twoway lpolyci rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1998) , bw(62) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 sentdate if sentdate>=td(1jan1998) & sentdate<td(1jan1999) , bw(62) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 sentdate if binned_1y == 1 , mc(blue) ||, ///
 			 tline(1jan1998) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
-			 xtitle("Date of parole decision",  size(small)) ///
+			 xtitle("Date of sentence",  size(small)) ///
 			 ytitle("Return to prison rate"  ,  size(small)) ///
 			 xlabel(`=td(1jan1997)'(`=365.25/6')`=td(1jan1999)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_rtp_1y.eps", replace
 
-** MSE-optimal bandwidth 141 (2 years)
+** MSE-optimal bandwidth 150 (2 years)
 append using "../temp/binned_2y", gen(binned_2y)
-twoway lpolyci rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan1998) , bw(141) clcolor(black) degree (1) kernel(triangle) || ///
-	   lpolyci rtp3 ratedate if ratedate>=td(1jan1998) & ratedate<td(1jan2000) , bw(141) clcolor(black) degree (1) kernel(triangle) || ///
-	   scatter rtp3 ratedate if binned_2y == 1 , mc(blue) ||, ///
+twoway lpolyci rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan1998) , bw(150) clcolor(black) degree (1) kernel(triangle) || ///
+	   lpolyci rtp3 sentdate if sentdate>=td(1jan1998) & sentdate<td(1jan2000) , bw(150) clcolor(black) degree (1) kernel(triangle) || ///
+	   scatter rtp3 sentdate if binned_2y == 1 , mc(blue) ||, ///
 			 tline(1jan1998) ///
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
-			 xtitle("Date of parole decision",  size(small)) ///
+			 xtitle("Date of sentence",  size(small)) ///
 			 ytitle("Return to prison rate"  ,  size(small)) ///
 			 xlabel(`=td(1jan1996)'(`=365.25/3')`=td(1jan2000)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
@@ -122,7 +122,7 @@ graph export "../output/bin_fix_rtp_2y.eps", replace
 **** reg “percent of sentence served” on inmate’s personal characteristic in pre-reform period, 
 **** and use the regression to predict the "percent of sentence served" for inmates influenced by the reform (1993-2001). 
 clear
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 
 dis td(1jan1993)  // 12054
 dis td(31dec2001)  // 15340
@@ -165,40 +165,40 @@ gen p10=(predictserv<=`p10') if tentparoledate>=13880 & tentparoledate!=. & sent
 
 
 ******** RD with 6 months p25
-rdbwselect rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998) & pct90crime==1 & p25==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 34.310
-rdrobust rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998) & pct90crime==1 & p25==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // significant 0.71(0.36)
+rdbwselect rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998) & pct90crime==1 & p25==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 31
+rdrobust rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998) & pct90crime==1 & p25==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant 
 
 ******** RD with 1 year p25
-rdbwselect rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999) & pct90crime==1 & p25==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 79.054
-rdrobust rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999) & pct90crime==1 & p25==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // significant 0.51(0.25)
+rdbwselect rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999) & pct90crime==1 & p25==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 147
+rdrobust rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999) & pct90crime==1 & p25==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
 
 ******** RD with 2 years p25
-rdbwselect rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000) & pct90crime==1 & p25==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 188.267
-rdrobust rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000) & pct90crime==1 & p25==1, ///
+rdbwselect rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000) & pct90crime==1 & p25==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 184
+rdrobust rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000) & pct90crime==1 & p25==1, ///
 kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
 
 
 ******** RD with 6 months p10
-rdbwselect rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998) & pct90crime==1 & p10==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 72.762
-rdrobust rtp3 ratedate if ratedate>=td(1jul1997) & ratedate<td(1jul1998) & pct90crime==1 & p10==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant 
+rdbwselect rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998) & pct90crime==1 & p10==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 30
+cap rdrobust rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jul1998) & pct90crime==1 & p10==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // Not enough observations to perform calculations 
 
 ******** RD with 1 year p10
-rdbwselect rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999) & pct90crime==1 & p10==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 147.974
-rdrobust rtp3 ratedate if ratedate>=td(1jan1997) & ratedate<td(1jan1999) & pct90crime==1 & p10==1, ///
+rdbwselect rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999) & pct90crime==1 & p10==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 114
+rdrobust rtp3 sentdate if sentdate>=td(1jan1997) & sentdate<td(1jan1999) & pct90crime==1 & p10==1, ///
 kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
 
 ******** RD with 2 years p10
-rdbwselect rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000) & pct90crime==1 & p10==1, ///
-kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 221.643
-rdrobust rtp3 ratedate if ratedate>=td(1jan1996) & ratedate<td(1jan2000) & pct90crime==1 & p10==1, ///
+rdbwselect rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000) & pct90crime==1 & p10==1, ///
+kernel(triangular) p(1) bwselect(mserd) c(13880) // MSE-optimal bandwidth is 236
+rdrobust rtp3 sentdate if sentdate>=td(1jan1996) & sentdate<td(1jan2000) & pct90crime==1 & p10==1, ///
 kernel(triangular) p(1) bwselect(mserd) c(13880) // insignificant
 
 

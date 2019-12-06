@@ -5,25 +5,25 @@ use "../input/GA_crime15"
 ** drop outliers in tentparoledate
 format tentparoledate %td
 drop if tentparoledate < admitdate & admitdate!=.
-save "../input/GA_crime15", replace
+save "../temp/GA_crime15_clean", replace
 
 
 ******** RD with 6 months
 * This doesn't work, Invertibility problem in the computation of preliminary bandwidth below the threshold...
 clear all
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 sort tentparoledate
 order tentparoledate
 dis td(18mar1981)
 cap rdbwselect rtp3 tentparoledate if tentparoledate>=td(18apr1980) & tentparoledate<td(18feb1982), ///
 kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
-cap rdrobust rtp3 tentparoledate if tentparoledate>=td(18apr1980) & tentparoledate<td(18feb1981), ///
+cap rdrobust rtp3 tentparoledate if tentparoledate>=td(18apr1980) & tentparoledate<td(18feb1982), ///
 kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
 
 
 ******** RD with 1 year
 clear all
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 sort tentparoledate
 order tentparoledate
 dis td(18mar1981)
@@ -35,7 +35,7 @@ kernel(triangular) p(1) bwselect(mserd) c(7747) //  Invertibility problem
 
 ******** RD with 2 years
 clear all
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 sort tentparoledate
 order tentparoledate
 dis td(18mar1981)
@@ -47,7 +47,7 @@ kernel(triangular) p(1) bwselect(mserd) c(7747) // insignificant
 
 ********
 clear
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 binscatter rtp3 tentparoledate if tentparoledate>=td(18sep1980) & tentparoledate<td(18sep1981), tline(7747) n(40) savedata(binned81_6m) replace line(none)
 clear
 qui do binned81_6m
@@ -56,7 +56,7 @@ erase "../code/binned81_6m.do"
 erase "../code/binned81_6m.csv"
 
 clear
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 binscatter rtp3 tentparoledate if tentparoledate>=td(18mar1980) & tentparoledate<td(18mar1982), tline(7747) n(60) savedata(binned81_1y) replace line(none)
 clear
 qui do binned81_1y
@@ -65,7 +65,7 @@ erase "../code/binned81_1y.do"
 erase "../code/binned81_1y.csv"
 
 clear
-use "../input/GA_crime15"
+use "../temp/GA_crime15_clean"
 binscatter rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparoledate<td(18mar1983), tline(7747) n(100) savedata(binned81_2y) replace line(none)
 clear
 qui do binned81_2y

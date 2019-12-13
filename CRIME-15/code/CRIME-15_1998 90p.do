@@ -84,7 +84,7 @@ twoway lpolyci rtp3 sentdate if sentdate>=td(1jul1997) & sentdate<td(1jan1998) ,
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
 			 xtitle("Date of sentence",  size(small)) ///
 			 ytitle("Return to prison rate"  ,  size(small)) ///
-			 xlabel(`=td(1jul1997)'(`=365.25/12')`=td(1jul1998)', format(%tdMon-YY) labsize(small)) ///
+			 xlabel(`=td(30jun1997)'(`=365.25/12')`=td(1jul1998)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_rtp_6m.eps", replace

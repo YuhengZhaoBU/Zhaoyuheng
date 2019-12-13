@@ -83,7 +83,7 @@ twoway lpolyci rtp3 tentparoledate if tentparoledate>=td(18mar1979) & tentparole
 			 legend(order(1) label(1 "Return to prison rate, 95% CI") region(style(none)) margin(zero) size(small)) ///
 			 xtitle("Date of parole decision",  size(small)) ///
 			 ytitle("Return to prison rate"  ,  size(small)) ///
-			 xlabel(`=td(1feb1981)'(`=365.25/3')`=td(18mar1983)', format(%tdMon-YY) labsize(small)) ///
+			 xlabel(`=td(18mar1979)'(`=365.25/3')`=td(18mar1983)', format(%tdMon-YY) labsize(small)) ///
 			 ylabel(.05 "5%" .1 "10%" .15 "15%" .2 "20%" .25 "25%" .3 "30%" .35 "35%" .4 "40%", angle(hor) labsize(small)) ///	
 			 scheme(s1color) name(rtp, replace)
 graph export "../output/bin_fix_rtp81_2y2.eps", replace
